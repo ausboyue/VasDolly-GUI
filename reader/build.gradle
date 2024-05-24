@@ -1,0 +1,9 @@
+apply plugin: 'java-library'
+
+dependencies {
+    api project(':common')
+}
+
+targetCompatibility = JavaVersion.VERSION_1_8
+sourceCompatibility = JavaVersion.VERSION_1_8
+

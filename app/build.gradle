@@ -1,0 +1,47 @@
+apply plugin: 'com.android.application'
+
+buildscript {
+    repositories {
+        // central仓和jCenter仓的聚合仓
+        maven {
+            url 'https://maven.aliyun.com/repository/public'
+        }
+        // google仓
+        maven { url 'https://maven.aliyun.com/repository/google' }
+        // aliyun release仓
+        maven { url 'https://maven.aliyun.com/repository/releases/' }
+        // git构建仓库
+        maven { url "https://jitpack.io" }
+    }
+}
+
+android {
+    compileSdkVersion rootProject.compileSdkVersion
+    defaultConfig {
+        applicationId "cn.icheny.vasdolly.app"
+        minSdkVersion rootProject.minSdkVersion
+        targetSdkVersion rootProject.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
+    }
+
+    lintOptions {
+        abortOnError false
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    //noinspection GradleDependency
+    api 'androidx.appcompat:appcompat:1.4.0'
+}

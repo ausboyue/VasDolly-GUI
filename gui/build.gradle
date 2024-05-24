@@ -1,0 +1,48 @@
+buildscript {
+    repositories {
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath 'gradle.plugin.com.github.jengelman.gradle.plugins:shadow:7.0.0'
+    }
+}
+
+plugins {
+    id 'com.github.johnrengelman.shadow' version '7.0.0'
+    id 'java'
+}
+
+shadowJar {
+    manifest {
+        attributes 'Main-Class': 'cn.icheny.channel_pkg.gui.Main'
+        attributes 'Version': "1.0.0"
+    }
+}
+
+dependencies {
+    implementation project(':common')
+    implementation project(':reader')
+    implementation project(':writer')
+    implementation project(':verify')
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+}
+
+task generateJar(type: Copy, dependsOn: shadowJar) {
+    from('build/libs') {
+        include 'gui-all.jar'
+    }
+    into('jar')
+    rename('gui-all.jar', 'VasDolly-GUI.jar')
+}
+build.finalizedBy generateJar
+
+
+task deleteJar(type: Delete, dependsOn: clean) {
+    delete 'jar'
+}
+clean.finalizedBy deleteJar
+
