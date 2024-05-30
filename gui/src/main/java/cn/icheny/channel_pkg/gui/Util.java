@@ -331,10 +331,10 @@ public class Util {
      * @return
      */
     public static String getChannelApkName(String baseApkName, Channel channel) {
-        if (baseApkName.contains("base")) {
-            return baseApkName.replace("base", channel.code);
-        }
-        return channel + "-" + baseApkName;
+//        if (baseApkName.contains("base")) {
+//            return baseApkName.replace("base", channel.code);
+//        }
+        return appendFileName(baseApkName, channel.toString());
     }
 
 
@@ -493,6 +493,21 @@ public class Util {
 //        }
 //    }
     public static boolean isEmpty(String str) {
-        return str == null || str.isEmpty();
+        return str == null || str.trim().isEmpty();
+    }
+
+    public static String appendFileName(String fileName, String appendStr) {
+        if (isEmpty(fileName) || isEmpty(appendStr)) {
+            return fileName;
+        }
+        int lastIndexOf = fileName.lastIndexOf(".");
+        String newName;
+        if (lastIndexOf > 0) {
+            String realFileName = fileName.substring(0, lastIndexOf);
+            newName = realFileName + "_" + appendStr + fileName.substring(lastIndexOf);
+        } else {
+            newName = fileName + "_" + appendStr;
+        }
+        return newName;
     }
 }
