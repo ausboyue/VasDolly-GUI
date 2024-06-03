@@ -120,7 +120,7 @@ public class Main {
         String signAliasPwd = propertiesUtil.get(KEY_SIGN_ALIAS_PWD);
 
 
-        JFrame frame = new JFrame("多渠道打包工具");
+        JFrame frame = new JFrame("多渠道打包工具v1.0.1");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(620, 400);
         frame.setMinimumSize(new Dimension(620, 300));
